@@ -1,0 +1,95 @@
+
+-- equation 4 : `x = x ◇ y` "left absorption"
+-- equation 3744 : `x ◇ y = (x ◇ z) ◇ (w ◇ y)` "bypass"
+example (G : Type) [Magma G] (ass : Equation4 G) : Equation3744 G :=
+fun x y z w =>
+
+  calc x ◇ y = x         := (ass x y).symm
+  _ = x ◇ z              := ass x z
+  _ = (x ◇ z) ◇ (w ◇ y)  := ass (x ◇ z) (w ◇ y)
+
+
+
+
+
+
+
+
+-- equation 877 : `x = y ◇ ((x ◇ x) ◇ (z ◇ z))`
+-- equation 2 :   `x = y`
+example (G : Type) [Magma G] (ass : Equation877 G) : Equation2 G :=
+fun x y =>
+
+  calc x
+  _ = y ◇ ((x ◇ x) ◇ (x ◇ x))                                                                                := by rw [←ass x y x]
+  _ = y ◇ (y ◇ ((((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x))) ◇ (((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x)))))  := by rw [←ass ((x ◇ x) ◇ (x ◇ x)) y ((x ◇ x) ◇ (x ◇ x))]
+  _ = y ◇ (y ◇ (x ◇ x))                                                                                      := by rw [←ass x ((x ◇ x) ◇ (x ◇ x)) x]
+  _ = y ◇ ((((y ◇ y) ◇ (y ◇ y)) ◇ ((y ◇ y) ◇ (y ◇ y))) ◇ (x ◇ x))                                            := by rw [←ass y ((y ◇ y) ◇ (y ◇ y)) y]
+  _ = ((y ◇ y) ◇ (y ◇ y))                                                                                    := by rw [←ass ((y ◇ y) ◇ (y ◇ y)) y x]
+  _ = y ◇ ((((y ◇ y) ◇ (y ◇ y)) ◇ ((y ◇ y) ◇ (y ◇ y))) ◇ (y ◇ y))                                            := by rw [←ass ((y ◇ y) ◇ (y ◇ y)) y y]
+  _ = y ◇ (y ◇ (y ◇ y))                                                                                      := by rw [←ass y ((y ◇ y) ◇ (y ◇ y)) y]
+  _ = y ◇ (y ◇ ((((y ◇ y) ◇ (y ◇ y)) ◇ ((y ◇ y) ◇ (y ◇ y))) ◇ (((y ◇ y) ◇ (y ◇ y)) ◇ ((y ◇ y) ◇ (y ◇ y)))))  := by rw [←ass y ((y ◇ y) ◇ (y ◇ y)) y]
+  _ = y ◇ ((y ◇ y) ◇ (y ◇ y))                                                                                := by rw [←ass ((y ◇ y) ◇ (y ◇ y)) y ((y ◇ y) ◇ (y ◇ y))]
+  _ = y                                                                                                      := by rw [←ass y y y]
+
+
+
+
+
+-- equation 877 : `x = y ◇ ((x ◇ x) ◇ (z ◇ z))`
+-- equation 2 :   `x = y`
+example (G : Type) [Magma G] (ass : Equation877 G) : Equation2 G :=
+fun x₁ y₁ =>
+
+  let x₂ := x₁ ◇ x₁
+  let x₄ := x₂ ◇ x₂
+  let x₈ := x₄ ◇ x₄
+  let y₂ := y₁ ◇ y₁
+  let y₄ := y₂ ◇ y₂
+  let y₈ := y₄ ◇ y₄
+
+  have hy₈ : y₁ = y₈ := ass y₁ y₄ y₁
+
+  calc x₁
+  _ = y₁ ◇ x₄                := by rw [ass x₁ y₁ x₁]
+  _ = y₁ ◇ (y₁ ◇ (x₈ ◇ x₈))  := by rw [ass x₄ y₁ x₄]
+  _ = y₁ ◇ (y₁ ◇ (x₁ ◇ x₁))  := by rw [ass x₁ x₄ x₁]
+  _ = y₁ ◇ (y₈ ◇ (x₁ ◇ x₁))  := by rw [hy₈]
+  _ = y₄                     := by rw [←ass y₄ y₁ x₁]
+  _ = y₁ ◇ (y₈ ◇ (y₁ ◇ y₁))  := by rw [ass y₄ y₁ y₁]
+  _ = y₁ ◇ (y₁ ◇ (y₁ ◇ y₁))  := by rw [hy₈]
+  _ = y₁ ◇ (y₁ ◇ (y₈ ◇ y₈))  := by rw [hy₈]
+  _ = y₁ ◇ y₄                := by rw [ass y₄ y₁ y₄]
+  _ = y₁                     := by rw [←ass y₁ y₁ y₁]
+
+
+
+
+
+-- equation 877 : `x = y ◇ ((x ◇ x) ◇ (z ◇ z))`
+-- equation 2 :   `x = y`
+example (G : Type) [Magma G] (ass : Equation877 G) : Equation2 G :=
+fun x₁ y₁ =>
+
+  let x₂ := x₁ ◇ x₁
+  let x₄ := x₂ ◇ x₂
+  let x₈ := x₄ ◇ x₄
+  let y₂ := y₁ ◇ y₁
+  let y₄ := y₂ ◇ y₂
+  let y₈ := y₄ ◇ y₄
+
+  have hy₈ : y₁ = y₈ := ass y₁ y₄ y₁
+  have hx₈ : x₁ = x₈ := ass x₁ x₄ x₁
+
+  calc x₁
+  _ = x₁ ◇ x₄                := by rw [←ass x₁ x₁ x₁]
+  _ = x₁ ◇ (x₁ ◇ (x₈ ◇ x₈))  := by rw [←ass x₄ x₁ x₄]
+  _ = x₁ ◇ (x₁ ◇ x₂)         := by rw [←hx₈]
+  _ = x₁ ◇ (x₈ ◇ x₂)         := by rw [←hx₈]
+  _ = x₄                     := by rw [←ass x₄ x₁ x₁]
+  _ = x₁ ◇ (x₈ ◇ (y₁ ◇ y₁))  := by rw [ass x₄ x₁ y₁]
+  _ = x₁ ◇ (x₁ ◇ (y₁ ◇ y₁))  := by rw [hx₈]
+  _ = x₁ ◇ (x₁ ◇ (y₈ ◇ y₁))  := by rw [hy₈]
+  _ = x₁ ◇ (x₁ ◇ (y₈ ◇ y₈))  := by rw [hy₈]
+  _ = x₁ ◇ y₄                := by rw [←ass y₄ x₁ y₄]
+  _ = y₁                     := by rw [←ass y₁ x₁ y₁]
