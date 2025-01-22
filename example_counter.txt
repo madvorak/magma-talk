@@ -1,0 +1,14 @@
+open Eq73.Greedy
+
+example : ∃ (G : Type) (_ : Magma G), Equation73 G ∧ ¬ Equation4380 G := by
+  have ⟨e, he⟩ :
+    ∃ e : Extension,
+      e = fromList ([(1, x₁), (x₁, x₂), (x₂, 1)] ++ [(x₁⁻¹, x₃), (x₃ * x₁, x₄), (x₄, x₁)]) :=
+    ⟨⟨_, fromList_ok⟩, rfl⟩
+  refine ⟨GreedyMagma e, inferInstance, eq73 e, fun holds => ?_⟩
+  specialize holds (1 : A)
+  simp only [Magma.op, instMagma, op] at holds
+  group at holds
+  rw [fromList_eval he 1 x₁, fromList_eval he (x₁^(-1)) x₃, fromList_eval he x₁ x₂] at holds
+  have nh : x₂ ≠ x₃ * x₁ := by decide
+  exact nh holds

@@ -1,0 +1,19 @@
+Mathoverflow post
+Terry Tao announced...
+Easy proof
+Easy counterexample
+Another nonimplication (associativity does not imply commutativity)
+Why magmas?
+Why equations?
+Scope of the project (22 million questions)
+Free magmas [for equation]
+Kisilievich and why it doesn't scale
+Lean and manual vs automated contributions
+Transitivity (mention that the two algorithms are currently a part of the trusted codebase)
+Dashboard
+Equation explorer
+Difficult proof
+Difficult counterexample
+Metatheorems (if an infinite counterexample exists, countable counterexample exists; abstract greedy algorithm)
+Finite magmas
+Lessons learnt
