@@ -1,0 +1,111 @@
+\documentclass{beamer}
+\usetheme{default}
+\usepackage{centernot}
+
+\newcommand{\op}{\diamond}
+
+
+\title{Magma equations}
+
+\author{Matthew Bolan, Jose Brox, Mario Carneiro, Martin Dvo\v{r}\'ak, Andr\'es Goens, Harald Husum, Zoltan Kocsis, Alex Meiburg, Pietro Monticone, David Renshaw, Cody Roux, J\'er\'emy~Scanvic, Shreyas Srinivas, Anand Rao Tadipatri, Terence Tao, Vlad Tsyrklevich, Daniel Weber, Fan Zheng,\\et al.}
+
+\date{2025-01-28}
+
+
+\begin{document}
+\begin{frame}[plain]
+    \maketitle
+\end{frame}
+
+
+\begin{frame}{Frame Title}
+\end{frame}
+
+
+\begin{frame}{Implication graph completion}
+\begin{itemize}
+	\item If $P \implies Q$ and $Q \implies R$, then $P \implies R$.
+	\item If $P \implies Q$ and $P \centernot\implies R$, then $Q \centernot\implies R$.
+	\item If $Q \implies R$ and $P \centernot\implies R$, then $P \centernot\implies Q$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Frame Title}
+\end{frame}
+
+
+\begin{frame}{Counterexample constructions}
+
+\begin{itemize}
+	\item Finite magmas
+	\item Linear models
+	\item Translation-invariant models
+	\item Twisting semigroups
+	\item Greedy constructions
+	\item Ad-hoc modifications
+	\item Combinations of the above
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Greedy constructions}{Preliminaries}
+
+We want to build a magma operation $\op \colon M \times M \to M$ that obeys one equation $E$ but not another $E'$.
+
+We one can first consider \emph{partial magma operations} $\op \colon \Omega \to M$ defined on some  $\Omega \subseteq M \times M$.
+
+We say that a partial operation $\op' \colon \Omega' \to M$ \emph{extends} $\op \colon \Omega \to M$ iff:\!
+\begin{itemize}
+	\item $\Omega \subseteq \Omega'$
+	\item $(x, y) \in \Omega \implies x \op y = x \op' y$
+\end{itemize}
+
+Given a sequence $\op_n \colon \Omega_n \to M$ of partial operations, each of which is an extension of the previous, we can define the \emph{direct limit} $\op_\infty \colon \bigcup_n \Omega_n \to M$ to be the partial operation defined by $x \op_\infty y := x \op_n y$ whenever $(x,y) \in \Omega_n$.
+
+\end{frame}
+
+
+\begin{frame}{Greedy constructions}{Abstract greedy algorithm}
+	
+Let $E$ and $E'$ be equations.
+Let $\Gamma$ be a first-order theory regarding a partial magma operations $\op \colon \Omega \to M$ on a carrier $M$.
+Assume the following:
+\begin{itemize}
+	\item (Seed) There exists a finitely supported partial magma operation $\op_0 \colon \Omega_0 \to M$ satisfying $\Gamma$ that contradicts $E'$, in the sense that there is some assignment of variables in $E'$ in $M$ such that both sides of $E'$ are defined using $\op_0$ but not equal to each other.
+	\item (Soundness) If $\op_n \colon \Omega_n \to M$ is a sequence of partial magma operations obeying $\Gamma$ with each $\op_{n+1}$ an extension of $\op_n$, and the direct limit $\op_\infty$ is total, then this limit obeys $E$.
+	\item (Greedy extension) If $\op \colon \Omega \to M$ is a finitely supported partial magma operation obeying $\Gamma$, and $a,b \in M$, then there exists a finitely supported extension $\op' \colon \Omega' \to M'$ of $\op$ to a possibly larger carrier $M'$ such that $a \op' b$ is defined.
+\end{itemize}
+Then $E \not\vdash E'$.
+	
+\end{frame}
+
+
+\begin{frame}{Greedy constructions}{Trial and error}
+
+\begin{itemize}
+	\item[1.] Start with a minimal rule set $\Gamma$ that has just enough axioms to imply the soundness property for the given hypothesis $E$.
+	\item[2.] Attempt to establish the greedy extension property for this rule set by setting $a \op' b$ equal to a new element $c \not \in M$, and then defining additional values of $\op'$ as necessary to recover the axioms of $\Gamma'$.
+	\item[3.] If this can be done in all cases, then locate a seed $\op_0$ refuting the given target $E'$, stop.
+	\item[4.] If there is an obstruction (often due to a collision in which a given operation $x \op' y$ is required to equal two different values), add one or more rules to $\Gamma$ to avoid this obstruction, and return to Step 2.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Greedy constructions}{Example (E73 does not imply E4380)}
+
+Prove that the equation $$x = y \op (y \op (x \op y))$$ does not imply
+the equation $$x \op (x \op x) = (x \op x) \op x$$
+.
+\begin{itemize}
+	\pause\item $y \op (x \op y) = d \implies y \op d = x$
+	\pause\item $x \op y = z \op y \implies x=z$
+	\pause\item $x \op y \ne y$
+\end{itemize}
+
+\end{frame}
+
+
+\end{document}
