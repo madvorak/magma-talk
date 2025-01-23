@@ -1,0 +1,1 @@
+We still make many informal mathematical arguments on the discussion thread, but they tend to be rapidly formalized in Lean, at which point disputes about correctness disappear, and we can instead focus on how best to deploy various verified techniques to tackle the remaining implications.
