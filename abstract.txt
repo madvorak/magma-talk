@@ -1,4 +1,4 @@
-On 2024-09-25, Terry Tao launched a project to explore the space of single-equation theories of general magmas, ordered by implication (with x=y being the bottom and x=x being the top).
+On 2024-09-25, Terence Tao launched a project to explore the space of single-equation theories of general magmas, ordered by implication (with x=y being the bottom and x=x being the top).
 The project focuses on the 4694 single-equation theories that involve at most four magma operations, up to symmetry and renaming, which give rise to 22 million potential implications to be proven or disproven.
 More than 50 people contributed to the project, which is now nearly finished.
 The success of the project results from the synergy between manual mathematical reasoning and automated theorem proving.
