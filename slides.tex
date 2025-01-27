@@ -225,11 +225,11 @@ Given a sequence $\op_n \colon \Omega_n \to M$ of partial operations, each of wh
 	
 Let $E$ and $E'$ be equations.
 Let $\Gamma$ be a first-order theory regarding a partial magma operations $\op \colon \Omega \to M$ on a carrier $M$.
-Assume the following:
+Assume:
 \begin{itemize}
 	\item (Seed) There exists a finitely supported partial magma operation $\op_0 \colon \Omega_0 \to M$ satisfying $\Gamma$ that contradicts $E'$, in the sense that there is some assignment of variables in $E'$ in $M$ such that both sides of $E'$ are defined using $\op_0$ but not equal to each other.
 	\item (Soundness) If $\op_n \colon \Omega_n \to M$ is a sequence of partial magma operations obeying $\Gamma$ with each $\op_{n+1}$ an extension of $\op_n$, and the direct limit $\op_\infty$ is total, then this limit obeys $E$.
-	\item (Greedy extension) If $\op \colon \Omega \to M$ is a finitely supported partial magma operation obeying $\Gamma$, and $a,b \in M$, then there exists a finitely supported extension $\op' \colon \Omega' \to M'$ of $\op$ to a possibly larger carrier $M'$ such that $a \op' b$ is defined.
+	\item (Greedy extension) If $\op \colon \Omega \to M$ is a finitely supported partial magma operation obeying $\Gamma$, $\forall\, a \in M$, $\forall\, b \in M$, there exists a finitely supported extension $\op' \colon \Omega' \to M'$ of $\op$ obeying $\Gamma$ such that $a \op' b$ is defined.
 \end{itemize}
 Then $E$ does not imply $E'$.
 	
