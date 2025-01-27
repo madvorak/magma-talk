@@ -53,7 +53,7 @@
 Prove that
 $$ \forall x, \forall y,\quad x = x \op y $$
 implies
-$$ \forall x, \forall y, \forall z, \forall w,\quad x \op y = (x  \op z)  \op (w \op y) $$
+$$ \forall x, \forall y, \forall z, \forall w,\quad x \op y = (x \op z)  \op (w \op y) $$
 .
 
 \pause
@@ -167,7 +167,56 @@ Let $X$ be a set of generators:
 \end{frame}
 
 
-\begin{frame}{Difficult proof}
+\begin{frame}{Difficult implication}
+
+Prove that
+$$ \forall x, \forall y,\forall z,\quad x = y \op ((x \op x) \op (z \op z)) $$
+implies
+$$ \forall x_1, \forall y_1,\quad x_1 = y_1 $$
+.
+
+\pause
+Solution (found by egg):\smallskip
+
+let $x_2 := x_1 \op x_1$
+
+let $x_4 := x_2 \op x_2$
+
+let $x_8 := x_4 \op x_4$
+
+let $y_2 := y_1 \op y_1$
+
+let $y_4 := y_2 \op y_2$
+
+let $y_8 := y_4 \op y_4$
+
+%have hy$_8$ : $y_1 = y_8 :=$ ass $y_1$ $y_4$ $y_1$
+
+\end{frame}
+
+
+\begin{frame}{Difficult implication}
+
+\texttt{ass :   }
+$ \forall x, \forall y,\forall z,\quad x = y \op ((x \op x) \op (z \op z)) $
+\bigskip
+
+Solution (found by egg):\vspace*{-1mm}
+$$
+\begin{aligned}
+	x_1 & = y_1 \op x_4                 && \qquad \qquad \texttt{ass }x_1\ y_1\ x_1 \\
+	& = y_1 \op (y_1 \op (x_8 \op x_8)) && \qquad \qquad \texttt{ass }x_4\ y_1\ x_4 \\
+	& = y_1 \op (y_1 \op (x_1 \op x_1)) && \qquad \qquad \texttt{ass }x_1\ x_4\ x_1 \\
+	& = y_1 \op (y_8 \op (x_1 \op x_1)) && \qquad \qquad \texttt{ass }y_1\ y_4\ y_1 \\
+	& = y_4                             && \qquad \qquad \texttt{ass }y_4\ y_1\ x_1 \\
+	& = y_1 \op (y_8 \op (y_1 \op y_1)) && \qquad \qquad \texttt{ass }y_4\ y_1\ y_1 \\
+	& = y_1 \op (y_1 \op (y_1 \op y_1)) && \qquad \qquad \texttt{ass }y_1\ y_4\ y_1 \\
+	& = y_1 \op (y_1 \op (y_8 \op y_8)) && \qquad \qquad \texttt{ass }y_1\ y_4\ y_1 \\
+	& = y_1 \op y_4                     && \qquad \qquad \texttt{ass }y_4\ y_1\ y_4 \\
+	& = y_1                             && \qquad \qquad \texttt{ass }y_1\ y_1\ y_1
+\end{aligned}
+$$
+
 \end{frame}
 
 
