@@ -2,6 +2,7 @@
 \usetheme{default}
 \usepackage{centernot}
 
+\setbeamertemplate{navigation symbols}{}
 \newcommand{\op}{\diamond}
 
 
@@ -53,7 +54,7 @@
 Prove that
 $$ \forall x, \forall y,\quad x = x \op y $$
 implies
-$$ \forall x, \forall y, \forall z, \forall w,\quad x \op y = (x \op z)  \op (w \op y) $$
+$$ \forall x, \forall y, \forall z, \forall w,\quad x \op y = (x \op z) \op (w \op y) $$
 .
 
 \pause
@@ -64,29 +65,48 @@ $$ x \op y = x = x \op z = (x \op z) \op (w \op y) $$
 
 \begin{frame}{Easy counterexample}
 Show that
-$$ todo $$
+$$ \forall x, \forall y, \forall z, \forall w,\quad x \op y = (x \op z) \op (w \op y) $$
 does not imply
-$$ todo $$
+$$ \forall x, \forall y,\quad x = x \op y $$
 .
 
 \pause
 Solution:
-$$ todo $$
+%\begin{center}
+$$
+\begin{array}{ | c | c c c c | }
+	\hline
+	\op & 0 & 1 & 2 & 3 \\
+	\hline
+	0 & 0 & 0 & 0 & 0 \\ 
+	%\hline
+	1 & 0 & 0 & 0 & 0 \\ 
+	%\hline
+	2 & 0 & 0 & 0 & 0 \\ 
+	%\hline
+	3 & 0 & 0 & 0 & 0 \\ 
+	\hline
+\end{array}
+$$
+%\end{center}
+
 \end{frame}
 
 
 \begin{frame}{Why equations?}
 
 \includegraphics[width=\textwidth]{eq_sign.png}
-``I will sette as I doe often in woorke use, a paire of paralleles, or twin lines of one lengthe, thus: =, bicause noe 2 thynges can be moare equalle.''
+``I will sette as I doe often in woorke use, a paire of paralleles, or twin lines of one lengthe, thus: =, bicause noe 2 thynges can be moare equalle.'' \bigskip
 
-Robert Recorde's mathematical book The Whetstone of Witte (1557)
+\tiny Robert Recorde (1557). The whetstone of witte, whiche is the seconde parte of Arithmetike: containyng thextraction of Rootes: The Coßike practise, with the rule of Equation: and the woorkes of Surde Nombers
 
 \end{frame}
 
 
 \begin{frame}{Why magmas?}
 \includegraphics[width=0.8\textwidth]{baklava}
+
+\tiny Retrieved 2025-01-23 from https://www.reddit.com/r/puns/comments/1gdyee8/its\_all\_greek\_to\_me\_\%E3\%83\%84/
 \end{frame}
 
 
@@ -107,7 +127,8 @@ Order-4 equations e.g.:\vspace*{-2mm}
 \end{frame}
 
 
-\begin{frame}{Lean and manual vs automated contributions}
+\begin{frame}{Workflow}
+\includegraphics[width=0.99\textwidth]{prooflow}
 \end{frame}
 
 
@@ -120,17 +141,22 @@ Order-4 equations e.g.:\vspace*{-2mm}
 \end{frame}
 
 
-\begin{frame}{Constructivism?}
-\includegraphics[width=0.6\textwidth]{intuitionists}
-\end{frame}
-
-
 \begin{frame}{Dashboard}
 \includegraphics[width=\textwidth]{dashboard}
 \end{frame}
 
 
 \begin{frame}{Equation explorer}
+\includegraphics[width=\textwidth]{equation_explorer}
+
+\scriptsize\url{https://teorth.github.io/equational_theories/implications/?42}
+\end{frame}
+
+
+\begin{frame}{Constructivism?}
+\includegraphics[width=0.6\textwidth]{intuitionists}
+
+\tiny Wachowski, L., \& Wachowski, L. (1999). The Matrix. Warner Bros. Retrieved 2021-11-11 from https://memegenerator.net/instance/47015052/matrix-morpheus-what-if-i-told-you-that-just-because-youre-not-wrong-it-doesnt-mean-youre-right
 \end{frame}
 
 
@@ -185,7 +211,12 @@ $$
 \end{frame}
 
 
-\begin{frame}{Metatheorems}
+\begin{frame}{Löwenheim-Skolem theorem (special case)}
+
+Let $\Gamma$ be a first-order theory.
+
+If $\Gamma$ has an infinite model, $\Gamma$ has a countable model.
+
 \end{frame}
 
 
@@ -224,15 +255,15 @@ Given a sequence $\op_n \colon \Omega_n \to M$ of partial operations, each of wh
 \begin{frame}{Greedy constructions}{Abstract greedy algorithm}
 	
 Let $E$ and $E'$ be equations.
-Let $\Gamma$ be a first-order theory regarding a partial magma operations $\op \colon \Omega \to M$ on a carrier $M$.
+Let $\Gamma$ be a first-order theory regarding a partial magma operations $\op \colon \Omega \to M$.
 Assume:
 \begin{itemize}
 	\item (Seed) There exists a finitely supported partial magma operation $\op_0 \colon \Omega_0 \to M$ satisfying $\Gamma$ that contradicts $E'$, in the sense that there is some assignment of variables in $E'$ in $M$ such that both sides of $E'$ are defined using $\op_0$ but not equal to each other.
-	\item (Soundness) If $\op_n \colon \Omega_n \to M$ is a sequence of partial magma operations obeying $\Gamma$ with each $\op_{n+1}$ an extension of $\op_n$, and the direct limit $\op_\infty$ is total, then this limit obeys $E$.
+	\item (Soundness) If $\op_n \colon \Omega_n \to M$ is a sequence of partial magma operations obeying $\Gamma$ with each $\op_{n+1}$ an extension of $\op_n$, and the direct limit $\op_\infty$ is total, then $\op_\infty$ obeys $E$.
 	\item (Greedy extension) If $\op \colon \Omega \to M$ is a finitely supported partial magma operation obeying $\Gamma$, $\forall\, a \in M$, $\forall\, b \in M$, there exists a finitely supported extension $\op' \colon \Omega' \to M'$ of $\op$ obeying $\Gamma$ such that $a \op' b$ is defined.
 \end{itemize}
 Then $E$ does not imply $E'$.
-	
+
 \end{frame}
 
 
@@ -250,8 +281,10 @@ Then $E$ does not imply $E'$.
 
 \begin{frame}{Greedy constructions}{Example (E73 does not imply E4380)}
 
-Show that the equation $$x = y \op (y \op (x \op y))$$ does not imply
-the equation $$x \op (x \op x) = (x \op x) \op x$$
+Show that
+$$\forall x, \forall y,\quad x = y \op (y \op (x \op y))$$
+does not imply
+$$\forall x,\quad x \op (x \op x) = (x \op x) \op x$$
 .
 \begin{itemize}
 	\pause\item $y \op (x \op y) = d \implies y \op d = x$
@@ -276,5 +309,15 @@ the equation $$x \op (x \op x) = (x \op x) \op x$$
 \includegraphics[width=\textwidth]{substack}
 \end{frame}
 
+\begin{frame}{Link}
+\url{https://teorth.github.io/equational_theories/}
+\vfill
+
+\includegraphics[width=\textwidth]{link}
+\tiny Retrieved 2025-01-28 from https://i.ytimg.com/vi/Kxc7sop6Gck/maxresdefault.jpg
+\vfill
+
+\Huge Thanks for your attention!
+\end{frame}
 
 \end{document}
